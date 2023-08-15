@@ -5,8 +5,9 @@ WORKDIR /app
 COPY requirements.txt /app
 COPY demoapp /app
 
-RUN pip install -r requirements.txt 
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    pip install -r requirements.txt && \
 
-COPY ..
-
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["python3"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
